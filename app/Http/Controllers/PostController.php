@@ -16,7 +16,7 @@ class PostController extends Controller
     public function index()
     {
         //1_retrieve all post models post and save in variable
-       $posts = Post::orderBy('created_at','desc')->limit(3)->get();
+       $posts = Post::where('is_published',1)->orderBy('updated_at','desc')->limit(3)->get();
         //2_send data to view 
         return view('pages.home', compact('posts'));
     }
@@ -91,6 +91,11 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        $published = 0;
+        if($request->has('is_published')){
+
+            $published = 1;
+        }
         $request->validate([
             'title' => 'required|min:5|string|max:180',
             'content' => 'required|min:20|max:350|string'
@@ -98,9 +103,10 @@ class PostController extends Controller
         ]);
 
         $post->update([
-             'title'=> $request->title,
+            'title'=> $request->title,
             'content'=> $request->content,
             'url_img'=> $request->url_img,
+            'is_published' => $published,
             'updated_at'=> now() 
 
         ]);

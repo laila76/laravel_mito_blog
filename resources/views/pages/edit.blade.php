@@ -16,8 +16,14 @@
                 class="mt-5 block w-full rounded-lg border-gray-400
                 " placeholder="votre contenu ..">{{ old('content',$post->content) }}</textarea>
                 <x-error-msg  name="content" />
-                
+                {{-- is publish --}}
+                <div class="">
+                    <label for="">Publication</label>
+                    <input type="checkbox" @checked(old('is_published', $post->is_published)) 
+                    name="is_published" id="" value="is_published">
+                </div>
                 {{-- img --}}
+                
                 <input type="text" name="url_img" placeholder="Url de votre image" 
                  value="https://source.unsplash.com/640x480/?animals?1">
                 <button class=" btn-primary btn mt-6 w-full" type="submit">Envoyer</button>
