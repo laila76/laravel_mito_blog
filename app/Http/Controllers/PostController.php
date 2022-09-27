@@ -86,6 +86,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('home')->with('status',"L'article a bien été supprimer");
     }
 }
