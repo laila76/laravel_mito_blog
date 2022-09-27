@@ -1,19 +1,20 @@
-<x-layouts.main-layout title="Creation article">
+<x-layouts.main-layout title="update Post">
 
    
     <div class="container">
-        <h1 class=" pt-24 font-bold text-4xl pb-10">New Post</h1>
-        <form action="{{ route('posts.store') }}" method="POST">
+        <h1 class=" pt-24 font-bold text-4xl pb-10">update Post</h1>
+        <form action="{{ route('posts.update',$post->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="">
                 {{-- title --}}
                 <input type="text" name="title" placeholder="Titre du post" 
-                class="block w-full rounded-lg border-gray-400" value="{{ old('title') }}">
+                class="block w-full rounded-lg border-gray-400" value="{{ old('title',$post->title) }}">
                 <x-error-msg  name="title" />
                 {{-- content --}}
                 <textarea name="content" cols="30" rows="10" 
                 class="mt-5 block w-full rounded-lg border-gray-400
-                " placeholder="votre contenu ..">{{ old('content') }}</textarea>
+                " placeholder="votre contenu ..">{{ old('content',$post->content) }}</textarea>
                 <x-error-msg  name="content" />
                 
                 {{-- img --}}
